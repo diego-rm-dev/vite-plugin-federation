@@ -3,8 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import App from './App';
 import Layout from './layouts/dashboard';
-import DashboardPage from './pages';
-import OrdersPage from './pages/orders';
+import DashboardPage from './pages/HomePage';
 
 
 const router = createBrowserRouter([
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
           {
             path: '',
             Component: DashboardPage,
-          },
-          {
-            path: 'orders',
-            Component: OrdersPage,
           },
         ],
       },
