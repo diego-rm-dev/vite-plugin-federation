@@ -3,7 +3,8 @@ import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import App from './App';
 import Layout from './layouts/dashboard';
-import DashboardPage from './pages/HomePage';
+import Remote1 from './pages/Remote1';
+import HomePage from './pages/index';
 
 
 const router = createBrowserRouter([
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: '',
-            Component: DashboardPage,
+            Component: HomePage,
+          },
+          {
+            path: 'orders',
+            Component: Remote1,
           },
         ],
       },
