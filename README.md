@@ -1,4 +1,4 @@
-Here's a professionally structured **README** for your repository:
+Below is an updated **README** that focuses on the new single-command setup using the **`setup.js`** script in the project’s root directory.
 
 ---
 
@@ -22,8 +22,6 @@ This example is based on the following package versions:
 
 ## **Getting Started**
 
-Follow these steps to set up and run the project locally.
-
 ### **Step 1: Clone the Repository**
 
 ```bash
@@ -36,55 +34,24 @@ Navigate into the project directory:
 cd module-federation-vite-example
 ```
 
----
+### **Step 2: One-Command Setup**
 
-### **Step 2: Install Dependencies**
-
-Run the following commands to install dependencies for all three applications:
-
-#### Install dependencies for the host application:
+In the **root** of the repository, run:
 
 ```bash
-cd host
-npm install
+npm run setup
 ```
 
-#### Install dependencies for the microservices:
+This command will:
 
-```bash
-cd ../microservice-1
-npm install
+1. Install dependencies for:
+   - **Host** (`host`)
+   - **Microservice-1** (`microservice-1`)
+   - **Microservice-2** (`microservice-2`)
+2. Start both microservices.
+3. Finally, start the host application.
 
-cd ../microservice-2
-npm install
-```
-
----
-
-### **Step 3: Start the Applications**
-
-Start the remote applications first to ensure they are available to the host:
-
-```bash
-cd ../microservice-1
-npm run dev
-```
-
-```bash
-cd ../microservice-2
-npm run dev
-```
-
-Once the remote applications are running, start the host application:
-
-```bash
-cd ../host
-npm run dev
-```
-
----
-
-### **Step 4: Access the Application**
+### **Step 3: Access the Application**
 
 Once all applications are running, open your browser and navigate to:
 
@@ -92,7 +59,7 @@ Once all applications are running, open your browser and navigate to:
 http://localhost:3000/
 ```
 
-You should see the host application loading components from both microservices.
+You should see the host application loading components from **microservice-1** and **microservice-2**.
 
 ---
 
@@ -100,10 +67,12 @@ You should see the host application loading components from both microservices.
 
 ```
 module-federation-vite-example/
-│-- host/               # The main application (Host)
-│-- microservice-1/      # First microservice (Remote 1)
-│-- microservice-2/      # Second microservice (Remote 2)
-└-- README.md            # Documentation
+│-- host/               # Main application (Host)
+│-- microservice-1/     # First microservice (Remote 1)
+│-- microservice-2/     # Second microservice (Remote 2)
+│-- setup.js            # Automation script
+│-- package.json        # Root package with "setup" script
+└-- README.md
 ```
 
 ---
@@ -160,7 +129,7 @@ export default defineConfig({
     plugins: [
         react(),
         federation({
-            name: 'remote1', // or 'remote2' depending on the service
+            name: 'remote1', // or 'remote2', depending on the microservice
             filename: 'remoteEntry.js',
             exposes: {
                 './App': './src/App.tsx',
@@ -195,7 +164,7 @@ export default defineConfig({
 - **`target`**:  
   Defines the JavaScript version for output.  
   - `"esnext"` allows the latest JavaScript features without additional transformation.
-  - Can be changed to older versions like `"es2015"` for wider browser support.
+  - Can be changed to older versions like `"es2015"` for broader browser support.
 
 - **`minify`**:  
   Controls whether the code should be minified (compressed).  
@@ -206,7 +175,7 @@ export default defineConfig({
 
 ## **Rendering Remote Components**
 
-To dynamically render remote components within the host application, the following pattern is used:
+In the host application, you can dynamically render remote components as follows:
 
 ```javascript
 import React, { Suspense, lazy } from 'react';
@@ -233,8 +202,8 @@ export default function Remote1() {
 - **`lazy`**: Dynamically imports the remote component at runtime.
 - **`Suspense`**: Provides a loading fallback while the remote component is being fetched.
 - **Import Paths**:  
-  - `"remote1/App"` corresponds to the `exposes` key in the remote's `vite.config.ts`.
-  - `"remote2/App"` works similarly for the second microservice.
+  - `"remote1/App"` matches the `exposes` key in the `microservice-1` configuration.
+  - `"remote2/App"` matches the `exposes` key in the `microservice-2` configuration.
 
 ---
 
@@ -242,10 +211,10 @@ export default function Remote1() {
 
 If you encounter issues, ensure:
 
-1. Both **microservice-1** and **microservice-2** are running before starting the **host**.
+1. Microservices **`microservice-1`** and **`microservice-2`** are running before or alongside the **host**.
 2. No port conflicts occur (3000 for host, 3001 and 3002 for remotes).
 3. The same versions of `react` and `react-dom` are installed across all applications.
-4. Clear browser cache if module federation updates are not reflected correctly.
+4. Your browser cache is cleared if module federation updates are not reflected.
 
 ---
 
@@ -260,9 +229,3 @@ This project is licensed under the [MIT License](LICENSE).
 Feel free to submit issues and pull requests to enhance this example.
 
 ---
-
-By following this guide, you will successfully set up **Module Federation** with Vite and React, allowing for a scalable and modular frontend architecture.
-
----
-
-Let me know if you need any modifications or improvements.
