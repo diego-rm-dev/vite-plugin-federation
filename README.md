@@ -1,7 +1,3 @@
-Below is an updated **README** that focuses on the new single-command setup using the **`setup.js`** script in the project’s root directory.
-
----
-
 # **Module Federation with Vite and React – Host and Remote Applications**
 
 This repository provides an example of how to implement **Module Federation** using `@module-federation/vite` in a **React** and **Vite** environment. The project consists of:
