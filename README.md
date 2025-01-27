@@ -1,5 +1,3 @@
-Below is an updated **README** that focuses on the new single-command setup using the **`setup.js`** script in the project’s root directory.
-
 ---
 
 # **Module Federation with Vite and React – Host and Remote Applications**
